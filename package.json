@@ -1,0 +1,24 @@
+{
+  "name": "shaq-teamates",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.js",
+  "bin": {
+    "finals": "./index.js"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "basketball-reference-js": "^0.2.6",
+    "commander": "^5.1.0",
+    "eslint": "^7.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "prettier": "^2.0.5"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
