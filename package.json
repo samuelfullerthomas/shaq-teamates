@@ -13,10 +13,13 @@
     "eslint": "^7.2.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
-    "prettier": "^2.0.5"
+    "prettier": "^2.0.5",
+    "release-it": "^13.6.3"
   },
   "devDependencies": {},
   "scripts": {
+    "release": "release-it",
+    "release:dry-run": "release-it --dry-run",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

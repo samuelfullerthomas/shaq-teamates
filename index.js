@@ -7,24 +7,28 @@ const fs = require("fs");
 const { program } = require("commander");
 program.version("0.0.1");
 
-program.arguments("<name>").action(async (name) => {
-  let matchupsWithRosters;
-  try {
-    matchupsWithRosters = require("./finals-matchups-with-rosters.json");
-  } catch (e) {
-    console.log("please run this command:");
-    console.log("finals generate");
-    process.exit(0);
-  }
-  const playedWithPlayer = await getPlayerTeamates(name);
-  const streaks = getPlayedWithPlayerFinalsAndStreaks(
-    playedWithPlayer,
-    "output",
-    matchupsWithRosters
-  );
-  console.log(`${name} had teamates in these finals:`);
-  console.log(streaks);
-});
+program
+  .arguments("<name>")
+  .option("-o, --output <filename>", "write the teamates to an output file")
+  .action(async (name, { output }) => {
+    console.log("getting streaks for " + name + "...");
+    let matchupsWithRosters;
+    try {
+      matchupsWithRosters = require("./finals-matchups-with-rosters.json");
+    } catch (e) {
+      console.log("please run this command:");
+      console.log("finals generate");
+      process.exit(0);
+    }
+    const playedWithPlayer = await getPlayerTeamates(name);
+    const streaks = getPlayedWithPlayerFinalsAndStreaks(
+      playedWithPlayer,
+      output,
+      matchupsWithRosters
+    );
+    console.log(`${name} had teamates in these finals:`);
+    console.log(streaks);
+  });
 
 program.command("generate").action(async () => {
   getFinalsTeamsAndRosters();
@@ -93,7 +97,7 @@ async function getRoster(url) {
 
 function getPlayedWithPlayerFinalsAndStreaks(
   playedWithArr,
-  name,
+  fileName,
   matchupsWithRosters
 ) {
   const playedWithByFinals = Object.keys(matchupsWithRosters).reduce(
@@ -133,18 +137,19 @@ function getPlayedWithPlayerFinalsAndStreaks(
     },
     []
   );
-
-  fs.writeFileSync(
-    name + ".json",
-    JSON.stringify(
-      {
-        streaks,
-        playedWithByFinals,
-      },
-      null,
-      2
-    )
-  );
+  if (fileName) {
+    fs.writeFileSync(
+      fileName + ".json",
+      JSON.stringify(
+        {
+          streaks,
+          playedWithByFinals,
+        },
+        null,
+        2
+      )
+    );
+  }
   return streaks;
 }
 
