@@ -126,8 +126,8 @@ function getPlayedWithPlayerFinalsAndStreaks(
         }
       } else if (start && current) {
         streaks.push([start, current, Number(current) - Number(start)]);
-        start = null;
-        current = null;
+        start = year;
+        current = year;
       }
       return streaks;
     },
