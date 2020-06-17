@@ -15,17 +15,13 @@ if you have node installed, skip the node install step. Otherwise:
 
 ## usage
 
-### `finals generate`
-generates the finals rosters from the basketball reference finals page and saves a copy locally (this speeds up the processing of future searches).
-
-IMPORTANT: You must run this command before you can get a players streaks.
-
 ### `finals "<player name>"`
 
 ex:
 `finals "shaquille oneal"`
 
 returns:
+
 ```
 shaquille oneal had teamates in these finals:
 [ [ '1967', '1967', 0 ], [ '1984', '2019', 35 ] ]
